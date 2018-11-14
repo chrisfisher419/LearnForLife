@@ -1,0 +1,128 @@
+﻿<!DOCTYPE HTML>
+<!--
+Editorial by HTML5 UP
+html5up.net | ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<html>
+<head>
+    <title>Learn For Life</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="~/Editorial/css/main.css" />
+</head>
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    @Html.ActionLink("Learn For Life", "Index", "Home")
+                </header>
+
+                <!-- Content -->
+                <section>
+                    <header class="main">
+                        <h1>Learn For Life</h1>
+                    </header>
+                    
+                    <div class="container body-content">
+                    @RenderBody()
+
+                    
+
+       
+
+                    <hr class="major" />
+
+                    <h2>How To Register</h2>
+   
+                    <hr class="major" />
+
+                    <h2>How To Use</h2>
+       
+                    <hr class="major" />
+
+                    <h2>Become an Instructor</h2>
+        
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="inner">
+
+                <!-- Search -->
+                <section id="search" class="alt">
+                    <form method="post" action="#">
+                        <input type="text" name="query" id="query" placeholder="Search" />
+                    </form>
+                </section>
+                <!-- Menu -->
+                <nav id="menu">
+                    <header class="major">
+                        <h2>Menu</h2>
+                    </header>
+                    <ul>
+                        <li>@Html.Partial("_LoginPartial")</li>
+                        <li>@Html.ActionLink("Homepage", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact Info", "Contact", "Home")</li>
+                        <li>
+                            <span class="opener">View Profile, Enroll, Communicate</span>
+                            <ul>
+                                <li>@Html.ActionLink("Profile", "Details", "User")</li>
+                                <li>@Html.ActionLink("Courses", "Index", "Course")</li>
+                                <li>@Html.ActionLink("Message Boards", "Index", "MessageBoards")</li>
+                                <li><a href="#">Emails</a></li>
+                            </ul>
+                        </li>
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                            <li>@Html.ActionLink("Subjects", "Index", "Subjects")</li>
+
+                        }
+                        <li>
+                            <span class="opener">Other Projects</span>
+                            <ul>
+                                <li><a href="#">Save The Kolache!</a></li>
+                                <li><a href="#">Workouts4You by Chris Clute</a></li>
+                                <li><a href="#">Supplement Store</a></li>
+                                <li><a href="https://github.com/chrisfisher419">GitHub</a></li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
+                    </ul>
+                </nav>
+
+
+                <!-- Footer -->
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Learn For Life</p>
+                </footer>
+
+            </div>
+        </div>
+
+    </div>
+@RenderSection("scripts", required: false)
+   
+    <script src="~/Editorial/js/jquery.min.js"></script>
+    <script src="~/Editorial/js/browser.min.js"></script>
+    <script src="~/Editorial/js/breakpoints.min.js"></script>
+    <script src="~/Editorial/js/util.js"></script>
+    <script src="~/Editorial/js/main.js"></script>
+
+</body>
+</html>
