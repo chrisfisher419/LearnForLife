@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LFL.Models.ViewModels
 {
@@ -14,6 +15,7 @@ namespace LFL.Models.ViewModels
         public string CourseInfo { get; set; }
         public int SubjectID { get; set; }
         [Display(Name="Course Content")]
+        [AllowHtml]
         public string CourseContent { get; set; }
 
         public virtual Subject Subject { get; set; }

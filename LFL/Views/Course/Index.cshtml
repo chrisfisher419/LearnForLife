@@ -4,7 +4,7 @@
     ViewBag.Title = "Courses";
 }
 
-<h2>Courses</h2>
+<h2>Courses Available</h2>
 
 <p>
     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
@@ -40,17 +40,23 @@
         <td>
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                @Html.ActionLink("Edit", "Edit", new {id = item.CourseID}) 
-            }
-            @Html.ActionLink("Details", "Details", new {id = item.CourseID})
-            |
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Delete", "Delete", new {id = item.CourseID})
+                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID })
             }
             
+            <button class="btn btn-default" type="submit" id="addressSearch" value="view"
+                    onclick="location.href = '@Url.Action("Details",  new {id = item.CourseID})'">
+               View Course
+            </button>
+
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+            }
+
             <button class="btn btn-default" type="submit" id="addressSearch" value="Sign Up"
-                    onclick="location.href = '@Url.Action("Enroll", "Enrollment", new {id = item.CourseID})'"> Enroll</button>
+                    onclick="location.href = '@Url.Action("Enroll", "Enrollment", new {id = item.CourseID})'">
+                Enroll
+            </button>
         </td>
     </tr>
 }

@@ -32,6 +32,7 @@ namespace LFL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Teacher")]
         public ActionResult Create([Bind(Include = "CourseID,CourseName, CourseInfo, SubjectID")] Course course)
         {
             if (ModelState.IsValid)
@@ -65,6 +66,7 @@ namespace LFL.Controllers
         }
 
         // GET: Subjects/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -80,7 +82,10 @@ namespace LFL.Controllers
             EnrollmentViewModel viewModel = new EnrollmentViewModel();
             var user = User.Identity.Name;
             User profile = db.Users.Where(x => x.UserName == user).FirstOrDefault();
-
+            if (profile == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
 
             UserViewModel model = new UserViewModel
@@ -91,20 +96,26 @@ namespace LFL.Controllers
                 Email = profile.Email,
                 //Activity = profile.Activity
             };
-            Enrollment list = new Enrollment();
-            list.UserID = profile.UserID;
-            list.CourseID = id ?? default(int);
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Enrollment list = db.Enrollments.Where(x => x.CourseID == course.CourseID).FirstOrDefault();
+            //list.UserID = profile.UserID;
+            //list.CourseID = id ?? default(int);
             //list.CourseID = course.CourseID;
             //list.DateSigned = System.DateTime.Now;
-
-                if (list.UserID == profile.UserID && list.CourseID == course.CourseID)
+            foreach (var item in db.Enrollments)
+            {
+                if (item.UserID == profile.UserID && item.CourseID == course.CourseID)
                 {
                     return View(course);
                 }
-                else
-                {
-                    return RedirectToAction("NotEnrolled", "Course");
-                }
+  
+            }
+
+            return RedirectToAction("NotEnrolled", "Course");
         }
 
         public ActionResult NotEnrolled()

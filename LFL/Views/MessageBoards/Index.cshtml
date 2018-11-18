@@ -4,7 +4,7 @@
     ViewBag.Title = "Message Board";
 }
 
-<h2>Index</h2>
+<h2>Topics</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -53,8 +53,11 @@
 
             @Html.ActionLink("Edit", "Edit", new {id = item.TopicID})
         }
-            @Html.ActionLink("Details", "Details", new {id = item.TopicID}) |
-        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            <button class="btn btn-default" type="submit" id="addressSearch" value="view"
+                    onclick="location.href = '@Url.Action("Details",  new {id = item.TopicID})'">
+                View Topic
+            </button>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
         {
 
             @Html.ActionLink("Delete", "Delete", new {id = item.TopicID})

@@ -20,5 +20,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button class="btn btn-default" type="submit" id="addressSearch" value="Sign Up"
+            onclick="location.href = '@Url.Action("Index", "Course")'">
+        Return
+    </button>
 </div>

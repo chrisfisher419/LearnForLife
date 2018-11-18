@@ -381,7 +381,6 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
-    <Content Include="Views\Course\CoursesBySubject.cshtml" />
     <Content Include="Views\Enrollment\AlreadyEnrolled.cshtml" />
     <Content Include="Views\Enrollment\Enroll.cshtml" />
     <Content Include="Views\MessageBoards\Create.cshtml" />
