@@ -15,6 +15,8 @@ namespace LFL.Models
         [Display(Name="Course Information")]
         public string CourseInfo { get; set; }
         public int SubjectID { get; set; }
+        [Display(Name="Course Content")]
+        public string CourseContent { get; set; }
 
         public virtual Subject Subject { get; set; }
         public IEnumerable<Subject> Subjects { get; set; }

@@ -122,3 +122,4 @@ C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.one.resources
 C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.csproj.GenerateResource.cache
 C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations._new.resources
 C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.update.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.newermigration.resources

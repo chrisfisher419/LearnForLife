@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201811132308552_update.Designer.cs">
       <DependentUpon>201811132308552_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811151730254_newer migration.cs" />
+    <Compile Include="Migrations\201811151730254_newer migration.Designer.cs">
+      <DependentUpon>201811151730254_newer migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DomainModels\CourseContent.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
@@ -385,6 +389,8 @@
     <Content Include="Views\MessageBoards\Details.cshtml" />
     <Content Include="Views\MessageBoards\Edit.cshtml" />
     <Content Include="Views\MessageBoards\Index.cshtml" />
+    <Content Include="Views\Course\Details.cshtml" />
+    <Content Include="Views\Course\NotEnrolled.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -412,6 +418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811132308552_update.resx">
       <DependentUpon>201811132308552_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811151730254_newer migration.resx">
+      <DependentUpon>201811151730254_newer migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
