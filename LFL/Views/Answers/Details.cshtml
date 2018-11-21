@@ -1,0 +1,42 @@
+﻿@model LFL.Models.Answer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Answer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.Questions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question.Questions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Correct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Correct)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AnswerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

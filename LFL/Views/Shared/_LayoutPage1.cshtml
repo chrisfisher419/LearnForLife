@@ -11,120 +11,147 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="~/Editorial/css/main.css" />
-</head>
-<body class="is-preload">
+    @*<script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>*@
+    <script src="~/Scripts/tinymce/tinymce.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    @*<script src="~/Scripts/main.js"></script>*@
+<script type="text/javascript">
+    tinyMCE.init({
+        // General options
+        mode: "textareas",
+        theme: "modern",
+        // Theme options
+        theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+        theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+        theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+        theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+        theme_advanced_toolbar_location: "top",
+        theme_advanced_toolbar_align: "left",
+        theme_advanced_statusbar_location: "bottom",
+        theme_advanced_resizing: true,
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+        // Example content CSS (should be your site CSS)
+        content_css: "~/Editorial/css/main.css",
+    });
+</script>
+        </head>
+        <body class="is-preload">
+
+        <!-- Wrapper -->
+        <div id="wrapper">
 
         <!-- Main -->
         <div id="main">
-            <div class="inner">
+        <div class="inner">
 
-                <!-- Header -->
-                <header id="header">
-                    @Html.ActionLink("Learn For Life", "Index", "Home")
-                </header>
+        <!-- Header -->
+        <header id="header">
+        @Html.ActionLink("Learn For Life", "Index", "Home")
+        </header>
 
-                <!-- Content -->
-                <section>
-                    <header class="main">
-                        <h1>Learn For Life</h1>
-                    </header>
+        <!-- Content -->
+        <section>
+        <header class="main">
+        <h1>Learn For Life</h1>
+        </header>
                     
-                    <div class="container body-content">
-                    @RenderBody()
+        <div class="container body-content">
+        @RenderBody()
 
-                    <hr />
+        <hr />
 
        
 
-                    <hr class="major" />
+        <hr class="major" />
                         
 
-                    <h2>How To Register</h2>
-                    <p>If you aren't already registered, simply click the Register link on the navigation bar and create and account!</p>
+        <h2>How To Register</h2>
+        <p>If you aren't already registered, simply click the Register link on the navigation bar and create and account!</p>
    
-                    <hr class="major" />
+        <hr class="major" />
 
-                    <h2>How To Use</h2>
-                    <p>Learn For Life is very simple to navigate! Everything is on the navigation bar or branched out from it!</p>
+        <h2>How To Use</h2>
+        <p>Learn For Life is very simple to navigate! Everything is on the navigation bar or branched out from it!</p>
        
-                    <hr class="major" />
+        <hr class="major" />
 
-                    <h2>Become an Instructor or Developer</h2>
-                    <p>Want to instruct or help develop? Shoot me an email at christopher.fisher419@outlook.com </p>
+        <h2>Become an Instructor or Developer</h2>
+        <p>Want to instruct or help develop? Shoot me an email at christopher.fisher419@outlook.com </p>
         
-                </section>
+        </section>
 
-            </div>
+        </div>
         </div>
 
         <!-- Sidebar -->
         <div id="sidebar">
-            <div class="inner">
+        <div class="inner">
 
-                <!-- Search -->
-                @*<section id="search" class="alt">
+        <!-- Search -->
+        @*<section id="search" class="alt">
                     <form method="post" action="#">
                         <input type="text" name="query" id="query" placeholder="Search" />
                     </form>*@
-                </section>
-                <!-- Menu -->
-                <nav id="menu">
-                    <header class="major">
-                        <h2>Menu</h2>
-                    </header>
-                    <ul>
-                        <li>@Html.Partial("_LoginPartial")</li>
-                        <li>@Html.ActionLink("Homepage", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact Info", "Contact", "Home")</li>
-                        <li>
-                            <span class="opener">View Profile, Enroll, Communicate</span>
-                            <ul>
-                                <li>@Html.ActionLink("Profile", "Details", "User")</li>
-                                <li>@Html.ActionLink("Courses", "Index", "Course")</li>
-                                <li>@Html.ActionLink("Message Boards", "Index", "MessageBoards")</li>
-                                <li><a href="#">Emails</a></li>
-                            </ul>
-                        </li>
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-                            <li>@Html.ActionLink("Subjects", "Index", "Subjects")</li>
+        </section>
+        <!-- Menu -->
+        <nav id="menu">
+        <header class="major">
+        <h2>Menu</h2>
+        </header>
+        <ul>
+            <li>@Html.Partial("_LoginPartial")</li>
+            <li>@Html.ActionLink("Homepage", "Index", "Home")</li>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+            <li>@Html.ActionLink("Contact Info", "Contact", "Home")</li>
+            <li>
+                <span class="opener">Profile, Message Board, Emails</span>
+                <ul>
+                    <li>@Html.ActionLink("Profile", "Details", "User")</li>
+                    <li>@Html.ActionLink("Message Boards", "Index", "MessageBoards")</li>
+                    <li><a href="#">Emails</a></li>
+                </ul>
+            </li>
+            <li>@Html.ActionLink("Courses", "Index", "Course")</li>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <li>@Html.ActionLink("Manage Roles", "Index", "RolesAdmin")</li>
+                <li>@Html.ActionLink("Manage Users", "Index", "UsersAdmin")</li>
+                <li>@Html.ActionLink("Manage Subjects", "Index", "Subjects")</li>
+                <li>@Html.ActionLink("Manage Lessons", "Index", "Lessons")</li>
+                <li>@Html.ActionLink("Manage Questions", "Index", "Questions")</li>
+                <li>@Html.ActionLink("Manage Answers", "Index", "Answers")</li>
 
-                        }
-                        <li>
-                            <span class="opener">Other Projects</span>
-                            <ul>
-                                <li><a href="#">Save The Kolache!</a></li>
-                                <li><a href="#">Workouts4You by Chris Clute</a></li>
-                                <li><a href="#">Supplement Store, Group Project with Chris Clute</a></li>
-                                <li><a href="https://github.com/chrisfisher419">GitHub</a></li>
-                            </ul>
-                        </li>
-                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
-                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"})</li>
-                    </ul>
-                </nav>
+            }
+            <li>
+                <span class="opener">Other Projects</span>
+                <ul>
+                    <li><a href="#">Save The Kolache!</a></li>
+                    <li><a href="#">Workouts4You by Chris Clute</a></li>
+                    <li><a href="#">Supplement Store, Group Project with Chris Clute</a></li>
+                    <li><a href="https://github.com/chrisfisher419">GitHub</a></li>
+                </ul>
+            </li>
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+        </nav>
 
 
-                <!-- Footer -->
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - Learn For Life</p>
-                    <p><i>Layout template from <a href="https://html5up.net">html5up.net</a> by ajlkn</i></p>
+        <!-- Footer -->
+        <footer>
+        <p>&copy; @DateTime.Now.Year - Learn For Life</p>
+        <p><i>Layout template from <a href="https://html5up.net">html5up.net</a> by ajlkn</i></p>
                     
-                </footer>
+        </footer>
 
-            </div>
+        </div>
         </div>
 
-    </div>
-@RenderSection("scripts", required: false)
+        </div>
+        @RenderSection("scripts", required: false)
    
-    <script src="~/Editorial/js/jquery.min.js"></script>
+        <script src="~/Editorial/js/jquery.min.js">
+</script>
     <script src="~/Editorial/js/browser.min.js"></script>
     <script src="~/Editorial/js/breakpoints.min.js"></script>
     <script src="~/Editorial/js/util.js"></script>

@@ -7,6 +7,7 @@
 <h2>Topics</h2>
 
 <p>
+
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -14,9 +15,9 @@
         <th>
             @Html.DisplayNameFor(model => model.TopicName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UserID)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
@@ -47,21 +48,28 @@
             @Html.DisplayFor(modelItem => item.TopicMessage)
         </td>
         <td>
-            
-        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-        {
 
-            @Html.ActionLink("Edit", "Edit", new {id = item.TopicID})
-        }
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <button class="btn btn-default" type="submit" id="addressSearch" value="view"
+                        onclick="location.href = '@Url.Action("Edit",  new {id = item.TopicID})'">
+                    Edit
+                </button>
+
+                
+            }
             <button class="btn btn-default" type="submit" id="addressSearch" value="view"
                     onclick="location.href = '@Url.Action("Details",  new {id = item.TopicID})'">
                 View Topic
             </button>
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-        {
-
-            @Html.ActionLink("Delete", "Delete", new {id = item.TopicID})
-        }
+            {
+                <button class="btn btn-default" type="submit" id="addressSearch" value="view"
+                        onclick="location.href = '@Url.Action("Delete",  new {id = item.TopicID})'">
+                    Delete
+                </button>
+                
+            }
         </td>
     </tr>
 }

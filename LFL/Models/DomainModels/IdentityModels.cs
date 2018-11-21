@@ -37,6 +37,7 @@ namespace IdentitySample.Models
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<CourseContent> CourseContents { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
 
         static ApplicationDbContext()
         {

@@ -40,7 +40,11 @@
         <td>
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID })
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.CourseID })*@
+                <button class="btn btn-default" type="submit" id="addressSearch" value="view"
+                        onclick="location.href = '@Url.Action("Edit",  new {id = item.CourseID})'">
+                    Edit
+                </button>
             }
             
             <button class="btn btn-default" type="submit" id="addressSearch" value="view"
@@ -50,7 +54,11 @@
 
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.CourseID })*@
+                <button class="btn btn-default" type="submit" id="addressSearch" value="view"
+                        onclick="location.href = '@Url.Action("Delete",  new {id = item.CourseID})'">
+                    Delete
+                </button>
             }
 
             <button class="btn btn-default" type="submit" id="addressSearch" value="Sign Up"

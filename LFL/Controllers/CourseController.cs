@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IdentitySample.Models;
 using LFL.Models;
+using LFL.Models.DomainModels;
 using LFL.Models.ViewModels;
 
 namespace LFL.Controllers
@@ -33,11 +35,45 @@ namespace LFL.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Teacher")]
-        public ActionResult Create([Bind(Include = "CourseID,CourseName, CourseInfo, SubjectID")] Course course)
+        public ActionResult Create([Bind(Include = "CourseID,CourseName, CourseInfo, SubjectID, CourseContent")] Course course)
         {
             if (ModelState.IsValid)
             {
                 db.Courses.Add(course);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "SubjectName", course.SubjectID);
+            return View(course);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.SubjectID = new SelectList(db.Subjects, "SubjectID", "SubjectName");
+            return View(course);
+        }
+
+        // POST: Subjects/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "CourseID,CourseName, CourseInfo, CourseContent, SubjectID")] Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -79,7 +115,6 @@ namespace LFL.Controllers
             {
                 return HttpNotFound();
             }
-            EnrollmentViewModel viewModel = new EnrollmentViewModel();
             var user = User.Identity.Name;
             User profile = db.Users.Where(x => x.UserName == user).FirstOrDefault();
             if (profile == null)
@@ -87,35 +122,28 @@ namespace LFL.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            var enrolled = db.Enrollments.Where(x=>x.CourseID == id && x.UserID == profile.UserID).FirstOrDefault();
+            if (enrolled == null)
+            {
+                return RedirectToAction("NotEnrolled", "Course");
+            }
 
             UserViewModel model = new UserViewModel
             {
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
                 PhoneNumber = profile.PhoneNumber,
-                Email = profile.Email,
-                //Activity = profile.Activity
+                Email = profile.Email
             };
-            if (model == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
-            Enrollment list = db.Enrollments.Where(x => x.CourseID == course.CourseID).FirstOrDefault();
-            //list.UserID = profile.UserID;
-            //list.CourseID = id ?? default(int);
-            //list.CourseID = course.CourseID;
-            //list.DateSigned = System.DateTime.Now;
-            foreach (var item in db.Enrollments)
-            {
-                if (item.UserID == profile.UserID && item.CourseID == course.CourseID)
-                {
-                    return View(course);
-                }
-  
-            }
 
-            return RedirectToAction("NotEnrolled", "Course");
+            course.Lessons = new List<Lesson>();
+
+            course.Lessons = db.Lessons.Where(x => x.CourseID == course.CourseID).ToList();
+            
+
+
+            return View(course);
         }
 
         public ActionResult NotEnrolled()

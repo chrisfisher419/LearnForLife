@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LFL.Models.ViewModels
 {
@@ -19,7 +20,11 @@ namespace LFL.Models.ViewModels
         public string TopicSubject { get; set; }
         [Display(Name = "Message")]
         public string TopicMessage { get; set; }
-        //public string TimeStamp { get; set; }
+
+        [Required]
+        [AllowHtml]
+        [UIHint("tinymce_jquery_full")]
+        public Replies Reply { get; set; }
 
         public IEnumerable<Replies> Replies { get; set; }
     }

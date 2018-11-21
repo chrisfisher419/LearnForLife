@@ -123,3 +123,10 @@ C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.csproj.GenerateResource.cache
 C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations._new.resources
 C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.update.resources
 C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.newermigration.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.next.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.next1.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.again.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.recent.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.newest.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.newest1.resources
+C:\Users\Chris\source\repos\LFL\LFL\obj\Debug\LFL.Migrations.supernewset.resources

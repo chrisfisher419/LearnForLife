@@ -1,4 +1,4 @@
-﻿@model LFL.Models.MessageBoard
+﻿@model LFL.Models.ViewModels.MessageBoardViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -10,21 +10,63 @@
     <h4>@Html.DisplayFor(model => model.TopicSubject)</h4>
     <hr />
     <table class="table-bordered table-striped">
-    <th>
-        <strong>Message: </strong>
-        <br/>
-        @Html.DisplayFor(model => model.TopicMessage)
         <tr>
-           Post By @Html.DisplayFor(model => model.UserName)
-        </tr>
-    </th>
-        <br />
+            <th>
+                <strong> Topic Message: </strong>
+                <br />
+                @Html.DisplayFor(model => model.TopicMessage)<br />
 
-    </dl>
+                Post By @Html.DisplayFor(model => model.UserName)
+
+            </th>
+        </tr>
+        
+        @if (Model.Replies != null)
+        {
+            foreach (var item in Model.Replies)
+            {
+                <tr><td>
+    @Html.Raw(item.ReplyMessage)
+    <br />
+    <strong>by @item.UserName</strong>
+</td></tr>
+            }
+        }
     </table>
-</div>
+    @using (Html.BeginForm("SaveReply","MessageBoards"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr/>
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Reply.ReplyMessage) @*new {htmlAttributes = new {@class = "form-control"}})*@
+                    @Html.ValidationMessageFor(model => model.Reply.ReplyMessage, "", new {@class = "text-danger"})
+                    @Html.HiddenFor(model => model.Reply.TopicID)
+                </div>
+            </div>
+            @*<button class="btn btn-default" type="submit" id="addressSearch" value="Sign Up"
+                    onclick="location.href = '@Url.Action("Reply", "Replies")'">
+                Reply
+            </button>*@
+            @*@Html.ActionLink("Reply", "Reply", "Replies")*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Post" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+       
+    }
+    
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.TopicID }) |*@
     <button class="btn btn-default" type="submit" id="addressSearch" value="Sign Up"
             onclick="location.href = '@Url.Action("Index")'"> Return</button>
 </p>
+</div>

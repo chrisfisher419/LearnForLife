@@ -1,0 +1,35 @@
+﻿@model LFL.Models.DomainModels.Lesson
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lesson</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dd>
+            @Html.DisplayFor(model => model.LessonName)
+        </dd>
+
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+
+    </dl>
+    <div>
+        @foreach(var item in Model.Questions)
+        {
+            @Html.Raw(item.Questions)
+        }
+    </div>
+    
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.LessonID }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

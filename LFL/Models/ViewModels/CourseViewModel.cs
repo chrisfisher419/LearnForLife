@@ -16,6 +16,7 @@ namespace LFL.Models.ViewModels
         public int SubjectID { get; set; }
         [Display(Name="Course Content")]
         [AllowHtml]
+        [UIHint("tinymce_jquery_full")]
         public string CourseContent { get; set; }
 
         public virtual Subject Subject { get; set; }

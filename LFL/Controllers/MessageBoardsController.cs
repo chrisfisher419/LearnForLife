@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using IdentitySample.Models;
 using LFL.Models;
+using LFL.Models.ViewModels;
 
 namespace LFL.Controllers
 {
@@ -23,18 +25,64 @@ namespace LFL.Controllers
         }
 
         // GET: MessageBoards/Details/5
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var user = User.Identity.Name;
+            User profile = db.Users.Where(x => x.UserName == user).FirstOrDefault();
             MessageBoard messageBoard = db.MessageBoards.Find(id);
+            messageBoard.Replies = db.Replies.Where(x=>x.TopicID == id).ToList();
+            Replies reply = new Replies();
+            reply.TopicID = messageBoard.TopicID;
+            MessageBoardViewModel model = new MessageBoardViewModel
+            {
+                UserName = profile.UserName,
+                TopicName = messageBoard.TopicName,
+                TopicMessage = messageBoard.TopicMessage,
+                TopicSubject = messageBoard.TopicSubject,
+                Reply = reply,
+                Replies = messageBoard.Replies
+            };
+           
+            //var user = User.Identity.Name;
+            //User profile = db.Users.Where(x => x.UserName == user).FirstOrDefault();
+            //reply.UserID = profile.UserID;
+            //reply.UserName = profile.UserName;
+            //if (reply != null)
+            //{
+            //    SaveReply(reply);
+            //}
+            //Map to your view model
+            //populate your replies object the user info, topic id
+
             if (messageBoard == null)
             {
                 return HttpNotFound();
             }
-            return View(messageBoard);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SaveReply([Bind(Include = "ReplyMessage,TopicID")] Replies reply)
+        {
+            //save the reply to the reply
+
+            var user = User.Identity.Name;
+            User profile = db.Users.Where(x => x.UserName == user).FirstOrDefault();
+            reply.UserID = profile.UserID;
+            reply.UserName = profile.UserName;
+            if (reply.ReplyMessage == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            db.Replies.Add(reply);
+            db.SaveChanges();
+            return RedirectToAction("Details",new{id= reply.TopicID});
+
         }
 
         // GET: MessageBoards/Create

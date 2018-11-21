@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LFL.Models.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,11 +19,13 @@ namespace LFL.Models
         public int SubjectID { get; set; }
         [Display(Name="Course Content")]
         [AllowHtml]
+        [UIHint("tinymce_jquery_full")]
         public string CourseContent { get; set; }
 
         public virtual Subject Subject { get; set; }
         public IEnumerable<Subject> Subjects { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
+        public IList<Lesson> Lessons { get; set; }
     }
 }
